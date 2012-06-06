@@ -14,14 +14,9 @@
  * same name, the subdirectory has priority. So don't do that. 
  * 
  * @package Readyforce.Libs
+ * @author barclay loftus
  */
 class MY_Router extends CI_Router {
-
-    /**
-     * The array we hold our route data in
-     * @return array
-     */ 
-    //var $route = array ();
 
     /**
      * Method that sets the routing for a given request. 
@@ -45,37 +40,37 @@ class MY_Router extends CI_Router {
         }
     }
 
-	/**
-	 * Set the Route
-	 *
-	 * This function takes an array of URI segments as
-	 * input, and sets the current class/method
-	 *
-	 * @param	array
-	 * @param	bool
-	 * @return	void
-	 */
+    /**
+     * Set the Route
+     *
+     * This function takes an array of URI segments as
+     * input, and sets the current class/method
+     *
+     * @param   array
+     * @param   bool
+     * @return  void
+     */
     public function _set_request($segments = array()) {
-		$segments = $this->_validate_request($segments);
+        $segments = $this->_validate_request($segments);
 
-		if (count($segments) == 0)
-			return $this->_set_default_controller();
+        if (count($segments) == 0)
+            return $this->_set_default_controller();
 
-		$this->set_class($segments[0]);
+        $this->set_class($segments[0]);
 
         // A standard method request
         //
-		if (isset($segments[1]))
+        if (isset($segments[1]))
             $this->set_method($segments[1]);
-		else
-			$segments[1] = 'index';
+        else
+            $segments[1] = 'index';
 
-		// Update our "routed" segment array to contain the segments.
-		// Note: If there is no custom routing, this array will be
+        // Update our "routed" segment array to contain the segments.
+        // Note: If there is no custom routing, this array will be
         // identical to $this->uri->segments
         //
-		$this->uri->rsegments = $segments;
-	}
+        $this->uri->rsegments = $segments;
+    }
 
     /**
      * Method that validates the request, and overrides the base _validate_request(). 

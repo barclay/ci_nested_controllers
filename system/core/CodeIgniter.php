@@ -356,7 +356,13 @@
 
 		// Call the requested method.
 		// Any URI segments present (besides the class/function) will be passed to the method for convenience
-		call_user_func_array(array(&$CI, $method), array_slice($URI->rsegments, 2));
+        /**
+         * MODIFICATION: rather than using a hard coded '2' here, we need to find where the arguments end
+         */
+        $offset = 2;
+        if (method_exists($RTR, 'getArgumentOffset'))
+            $offset = $RTR->getArgumentOffset();
+		call_user_func_array(array(&$CI, $method), array_slice($URI->rsegments, $offset));
 	}
 
 
